@@ -1,0 +1,3 @@
+ceph01 ansible_host=ceph01 ansible_user=root
+ceph02 ansible_host=ceph02 ansible_user=root
+ceph03 ansible_host=ceph03 ansible_user=root

@@ -1,0 +1,28 @@
+[base]
+name=CentOS-$releasever - Base - 10.0.31.220/repository/mirrors-aliyun
+failovermethod=priority
+baseurl=https://10.0.31.220/repository/mirrors-aliyun/centos/7/os/$basearch/
+gpgcheck=0
+
+[updates]
+name=CentOS-$releasever - Updates - 10.0.31.220/repository/mirrors-aliyun
+failovermethod=priority
+baseurl=https://10.0.31.220/repository/mirrors-aliyun/centos/7/updates/$basearch/
+gpgcheck=0
+
+[extras]
+name=CentOS-$releasever - Extras - 10.0.31.220/repository/mirrors-aliyun
+failovermethod=priority
+baseurl=https://10.0.31.220/repository/mirrors-aliyun/centos/7/extras/$basearch/
+gpgcheck=0
+
+[epel]
+name=CentOS-$releasever - Epel - 10.0.31.220/repository/mirrors-aliyun
+failovermethod=priority
+baseurl=https://10.0.31.220/repository/mirrors-aliyun/epel/7/$basearch
+gpgcheck=0
+
+[docker-ce-stable]
+name=Docker CE Stable
+baseurl=https://10.0.31.220/repository/mirrors-aliyun/docker-ce/linux/centos/7/$basearch/stable
+gpgcheck=0

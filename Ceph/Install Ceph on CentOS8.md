@@ -1,0 +1,17 @@
+# Install Ceph on CentOS8
+
+## depends
+
+```yaml
+- hosts: all
+
+  - name: Install packages for ceph
+    yum:
+      name:
+        - python39
+        - systemd
+        - docker-ce
+        - chrony
+        - lvm2
+      state: present
+```

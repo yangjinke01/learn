@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express-service
+spec:
+  selector:
+    app: mongo-express
+  type: LoadBalancer # 是nodeport的扩展
+  externalIPs:
+    - 10.0.50.10
+  ports:
+    - port: 8081
+      targetPort: 8081
+      # nodePort: 30010 如果不写会自动创建
+      protocol: TCP

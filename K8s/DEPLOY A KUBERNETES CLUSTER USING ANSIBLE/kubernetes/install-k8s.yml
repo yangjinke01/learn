@@ -1,0 +1,53 @@
+---
+- hosts: "masters, workers"
+  remote_user: kube
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: yes
+  connection: ssh
+
+  tasks:
+    - name: Disable swap
+      shell: |
+        swapoff -a
+        sed -i '/ swap / s/^\(.*\)$/# \1/g' /etc/fstab
+
+    - name: Add Docker YUM repository
+      shell: |
+        yum install -y yum-utils
+        yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: present
+      register: return_code
+
+    - name: Copy Docker daemon.json to masters and workers
+      ansible.builtin.copy:
+        src: ./daemon.json
+        dest: /etc/docker/
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Start Docker
+      shell: |
+        systemctl daemon-reload
+        systemctl restart docker
+
+    - name: Add K8s YUM repository
+      ansible.builtin.copy:
+        src: ./kubernetes.repo
+        dest: /etc/yum.repos.d/
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: install K8s
+      yum:
+        name:
+          - kubeadm
+          - kubelet
+          - kubectl
