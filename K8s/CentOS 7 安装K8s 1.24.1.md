@@ -342,7 +342,7 @@ nodeRegistration:
   - effect: PreferNoSchedule
     key: node-role.kubernetes.io/master
 ---
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta3vir
 kind: ClusterConfiguration
 kubernetesVersion: v1.24.1
 imageRepository: registry.aliyuncs.com/google_containers
