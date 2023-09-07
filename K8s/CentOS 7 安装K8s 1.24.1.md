@@ -502,7 +502,7 @@ helm list
 选择 calico 作为 k8s 的 Pod 网络组件，下面使用 helm 在 k8s 集群中安装 calico。下载 tigera-operator 的 helm chart:
 
 ```shell
-wget https://github.com/projectcalico/calico/releases/download/v3.23.1/tigera-operator-v3.23.1.tgz
+wget https://github.com/projectcalico/calico/releases/download/v3.26.1/tigera-operator-v3.26.1.tgz
 ```
 
 查看这个 chart 的中可定制的配置:
@@ -847,3 +847,30 @@ kubectl create token kube-dashboard-admin-sa -n kube-system --duration=87600h
 ```
 
 使用上面的 token 登录 k8s dashboard。
+docker pull registry.k8s.io/kube-apiserver:v1.28.1
+docker pull registry.k8s.io/kube-controller-manager:v1.28.1
+docker pull registry.k8s.io/kube-scheduler:v1.28.1
+docker pull registry.k8s.io/kube-proxy:v1.28.1
+docker pull registry.k8s.io/pause:3.9
+docker pull registry.k8s.io/etcd:3.5.9-0
+docker pull registry.k8s.io/coredns/coredns:v1.10.1
+
+docker save -o kube-apiserver_v1.28.1.tgz registry.k8s.io/kube-apiserver:v1.28.1
+docker save -o kube-controller-manager_v1.28.1.tgz registry.k8s.io/kube-controller-manager:v1.28.1
+docker save -o kube-scheduler_v1.28.1.tgz registry.k8s.io/kube-scheduler:v1.28.1
+docker save -o kube-proxy_v1.28.1.tgz registry.k8s.io/kube-proxy:v1.28.1
+docker save -o pause_3.9.tgz registry.k8s.io/pause:3.9
+docker save -o etcd_3.5.9-0.tgz registry.k8s.io/etcd:3.5.9-0
+docker save -o coredns_v1.10.1.tgz registry.k8s.io/coredns/coredns:v1.10.1
+
+nerdctl --namespace k8s.io load -i coredns_v1.10.1.tgz
+nerdctl --namespace k8s.io load -i etcd_3.5.9-0.tgz
+nerdctl --namespace k8s.io load -i kube-apiserver_v1.28.1.tgz
+nerdctl --namespace k8s.io load -i kube-controller-manager_v1.28.1.tgz
+nerdctl --namespace k8s.io load -i kube-proxy_v1.28.1.tgz
+nerdctl --namespace k8s.io load -i kube-scheduler_v1.28.1.tgz
+nerdctl --namespace k8s.io load -i pause_3.9.tgz
+
+export http_proxy="192.168.2.52:7890"
+export https_proxy="192.168.2.52:7890"
+export no_proxy="localhost, 127.0.0.1"
