@@ -61,9 +61,9 @@ systemctl enable kubelet
 ```shell
 # 由于默认拉取镜像地址k8s.gcr.io国内无法访问，这里需要指定阿里云镜像仓库地址
 kubeadm init \
-  --apiserver-advertise-address=10.0.50.15 \
+  --apiserver-advertise-address=192.168.2.68 \
   --image-repository registry.aliyuncs.com/google_containers \
-  --kubernetes-version v1.24.1 \
+  --kubernetes-version v1.28.1 \
   --cri-socket=unix:///run/containerd/containerd.sock \
   --service-cidr=10.96.0.0/12 \
   --pod-network-cidr=10.244.0.0/16
@@ -104,3 +104,6 @@ yum install -y bash-completion
 kubectl completion bash >/etc/bash_completion.d/kubectl
 # 重新进入shell即可
 ```
+
+node-role.kubernetes.io/control-plane:NoSchedule
+                    node.kubernetes.io/not-ready:NoSchedule
