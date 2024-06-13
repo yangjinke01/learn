@@ -32,7 +32,7 @@ network:
   version: 2
   ethernets:
     enp0s3:
-      dhcp4: no
+      dhcp4: no 
       addresses:
         - 10.0.50.29/24
       routes:
@@ -40,6 +40,9 @@ network:
           via: 10.0.50.1
       nameservers:
           addresses: [8.8.8.8, 114.114.114.114]
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+    --set nfs.server=192.168.2.161 \
+    --set nfs.path=/nfs/
 ```
 
 When editing Yaml files, make sure you follow the YAML code indent standards. If the syntax is not correct, the changes will not be applied.

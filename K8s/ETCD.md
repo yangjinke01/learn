@@ -254,3 +254,4 @@ https://192.168.33.11:2379 is healthy: successfully committed proposal: took = 4
 https://192.168.33.12:2379 is healthy: successfully committed proposal: took = 49.391402ms
 https://192.168.33.13:2379 is healthy: successfully committed proposal: took = 54.411539ms
 ```
+docker save -o k8s.tgz registry.k8s.io/kube-apiserver:v1.25.14 registry.k8s.io/conformance:v1.25.14 registry.k8s.io/kube-scheduler:v1.25.14 registry.k8s.io/kube-controller-manager:v1.25.14 registry.k8s.io/kube-proxy:v1.25.14

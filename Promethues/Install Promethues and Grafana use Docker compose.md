@@ -11,7 +11,7 @@ vim /etc/prometheus/prometheus.yml
 
 ```yaml
 global:
-  scrape_interval:     15s
+  scrape_interval: 15s
   external_labels:
     monitor: 'codelab-monitor'
 scrape_configs:
